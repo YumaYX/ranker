@@ -37,5 +37,6 @@ if __FILE__ == $PROGRAM_NAME
     content << md_table([track.ranking, track.info])
   end
 
-  File.write('index.md', content)
+  Dir.mkdir('_site') unless Dir.exist?('_site')
+  File.write('_site/index.md', content)
 end
