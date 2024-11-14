@@ -12,5 +12,4 @@ class MusicTrack
   def info
     "#{@title} - #{@artist}"
   end
-
 end
