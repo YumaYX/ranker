@@ -2,9 +2,9 @@
 name: Deploy Jekyll with GitHub Pages dependencies preinstalled
 
 on:
-  # Runs on pushes targeting the default branch
   push:
-    branches: ["main"]
+  schedule:
+    - cron: '0 0 * * 3'
 
   # Allows you to run this workflow manually from the Actions tab
   workflow_dispatch:
@@ -35,10 +35,8 @@ jobs:
         with:
           source: ./
           destination: ./_site
-
       - name: Build
         run: ruby track_ranker.rb
-
       - name: Upload artifact
         uses: actions/upload-pages-artifact@v3
 
