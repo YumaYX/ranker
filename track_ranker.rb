@@ -37,5 +37,5 @@ if __FILE__ == $PROGRAM_NAME
     content << md_table([track.ranking, track.info])
   end
 
-  File.write('_site/index.md', content)
+  File.write('index.md', content)
 end
