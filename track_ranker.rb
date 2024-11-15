@@ -17,7 +17,7 @@ def itunes_ranking
   itunes_most_played.each do |ele|
     track = MusicTrack.new(ele['name'], ele['artistName'])
 
-    next if tracks.any? { |i| i.info == track.info }
+    next if tracks.any? { |i| i.info.eql?(track.info) }
 
     track.ranking = index
     tracks << track
