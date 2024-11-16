@@ -1,4 +1,6 @@
 
+fix:
+	rubocop -A ./*.rb
 
 pub:
 	git status

@@ -2,25 +2,25 @@
 
 require 'open-uri'
 require 'json'
-#require_relative 'music_track'
+# require_relative 'music_track'
 require_relative 'dclass'
 
 def itunes_most_played(num = 100)
   url = "https://rss.applemarketingtools.com/api/v2/jp/music/most-played/#{num}/songs.json"
-  #url = './songs.json'
+  # url = './songs.json'
   content = URI.open(url).read
   JSON.parse(content)['feed']['results']
 end
 
 def itunes_ranking(num = 30)
   tracks = []
-  index = 1
 
   itunes_most_played(num).each do |ele|
     myclass = create_dclass(ele)
     track = myclass.new
 
     next if tracks.any? { |i| i.info.eql?(track.info) }
+
     tracks << track
   end
   tracks
@@ -44,7 +44,7 @@ if __FILE__ == $PROGRAM_NAME
       [
         index,
         "![#{track.name}](#{track.artworkUrl100})",
-        md_link(track.info,track.url)
+        md_link(track.info, track.url)
       ]
     )
   end
