@@ -4,17 +4,17 @@ require 'open-uri'
 require 'json'
 require_relative 'music_track'
 
-def itunes_most_played
-  url = 'https://rss.applemarketingtools.com/api/v2/jp/music/most-played/100/songs.json'
+def itunes_most_played(num=100)
+  url = "https://rss.applemarketingtools.com/api/v2/jp/music/most-played/#{num}/songs.json"
   # url = './songs.json'
   content = URI.open(url).read
   JSON.parse(content)['feed']['results']
 end
 
-def itunes_ranking
+def itunes_ranking(num=30)
   tracks = []
   index = 1
-  itunes_most_played.each do |ele|
+  itunes_most_played(num).each do |ele|
     track = MusicTrack.new(ele['name'], ele['artistName'])
 
     next if tracks.any? { |i| i.info.eql?(track.info) }
