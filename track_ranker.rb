@@ -42,7 +42,8 @@ if __FILE__ == $PROGRAM_NAME
   end
 
   ref = md_link('RSS Feed Generator', 'https://rss.applemarketingtools.com/')
-  content << "\nReference: #{ref}"
+  content << "\n- #{Time.new}"
+  content << "\n- Reference: #{ref}"
 
   Dir.mkdir('output') unless Dir.exist?('output')
   File.write('output/index.md', content)
