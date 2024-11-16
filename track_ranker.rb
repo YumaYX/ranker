@@ -21,10 +21,7 @@ def itunes_ranking(num = 30)
     track = myclass.new
 
     next if tracks.any? { |i| i.info.eql?(track.info) }
-
-    track.ranking = index
     tracks << track
-    index += 1
   end
   tracks
 end
@@ -38,8 +35,8 @@ if __FILE__ == $PROGRAM_NAME
   header = %w[Rank Songs Image]
   content = md_table(header)
   content << md_table(Array.new(header.length, '---'))
-  itunes_ranking(7).each do |track|
-    content << md_table([track.ranking, track.info, "![#{track.name}](#{track.artworkUrl100})"])
+  itunes_ranking(7).each.with_index do |track, index|
+    content << md_table([index+1, track.info, "![#{track.name}](#{track.artworkUrl100})"])
   end
 
   content << "\nReference: [RSS Feed Generator](https://rss.applemarketingtools.com/)"

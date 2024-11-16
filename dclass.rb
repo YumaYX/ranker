@@ -2,8 +2,6 @@
 
 def create_dclass(hash)
   Class.new do
-    attr_accessor :ranking
-
     hash.each_key do |key|
       attr_accessor key.to_sym
     end
