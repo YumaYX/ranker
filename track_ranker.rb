@@ -2,8 +2,9 @@
 
 require 'open-uri'
 require 'json'
+
 # require_relative 'music_track'
-require_relative 'dclass'
+require_relative 'dynamic_class'
 
 def itunes_most_played(num = 100)
   url = "https://rss.applemarketingtools.com/api/v2/jp/music/most-played/#{num}/songs.json"
@@ -14,7 +15,7 @@ def itunes_most_played(num = 100)
 end
 
 def itunes_ranking(num = 30)
-  itunes_most_played(num).map { |ele| create_dclass(ele).new }
+  itunes_most_played(num).map { |ele| create_dynamic_class(ele).new }
 end
 
 def md_table(*arr)

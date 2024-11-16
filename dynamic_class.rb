@@ -1,6 +1,6 @@
 # frozen_string_literal: true
 
-def create_dclass(hash)
+def create_dynamic_class(hash)
   Class.new do
     hash.each_key do |key|
       attr_accessor key.to_sym
