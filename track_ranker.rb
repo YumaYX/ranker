@@ -36,6 +36,8 @@ if __FILE__ == $PROGRAM_NAME
   itunes_ranking.each do |track|
     content << md_table([track.ranking, track.info])
   end
+  
+  content << "\nReference: [RSS Feed Generator](https://rss.applemarketingtools.com/)"
 
   File.write('index.md', content)
 end
