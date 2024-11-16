@@ -36,7 +36,7 @@ end
 
 if __FILE__ == $PROGRAM_NAME
 
-  header = %w[Rank ArtWork Songs]
+  header = %w[Rank ArtWork Song]
   content = md_table(header)
   content << md_table(Array.new(header.length, '---'))
   itunes_ranking(7).each.with_index(1) do |track, index|
@@ -49,7 +49,8 @@ if __FILE__ == $PROGRAM_NAME
     )
   end
 
-  content << "\nReference: [RSS Feed Generator](https://rss.applemarketingtools.com/)"
+  ref = md_link('RSS Feed Generator', 'https://rss.applemarketingtools.com/')
+  content << "\nReference: #{ref}"
 
   Dir.mkdir('output') unless Dir.exist?('output')
   File.write('output/index.md', content)
