@@ -2,20 +2,23 @@
 
 require 'open-uri'
 require 'json'
-require_relative 'music_track'
+#require_relative 'music_track'
+require_relative 'dclass'
 
-def itunes_most_played(num=100)
+def itunes_most_played(_num = 100)
   url = "https://rss.applemarketingtools.com/api/v2/jp/music/most-played/#{num}/songs.json"
-  # url = './songs.json'
+  #url = './songs.json'
   content = URI.open(url).read
   JSON.parse(content)['feed']['results']
 end
 
-def itunes_ranking(num=30)
+def itunes_ranking(num = 30)
   tracks = []
   index = 1
+
   itunes_most_played(num).each do |ele|
-    track = MusicTrack.new(ele['name'], ele['artistName'])
+    myclass = create_dclass(ele)
+    track = myclass.new
 
     next if tracks.any? { |i| i.info.eql?(track.info) }
 
@@ -31,13 +34,17 @@ def md_table(*arr)
 end
 
 if __FILE__ == $PROGRAM_NAME
-  content = md_table(%w[Rank Songs])
-  content << md_table(['---', '---'])
-  itunes_ranking.each do |track|
-    content << md_table([track.ranking, track.info])
+
+  header = %w[Rank Songs Image]
+  content = md_table(header)
+  content << md_table(Array.new(header.length, '---'))
+  itunes_ranking(7).each do |track|
+    content << md_table([track.ranking, track.info, "![#{track.name}](#{track.artworkUrl100})"])
   end
-  
+
   content << "\nReference: [RSS Feed Generator](https://rss.applemarketingtools.com/)"
 
-  File.write('index.md', content)
+  Dir.mkdir('output') unless Dir.exist?('output')
+  File.write('output/index.md', content)
+  p content[0..100]
 end
