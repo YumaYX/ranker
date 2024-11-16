@@ -5,7 +5,7 @@ require 'json'
 #require_relative 'music_track'
 require_relative 'dclass'
 
-def itunes_most_played(_num = 100)
+def itunes_most_played(num = 100)
   url = "https://rss.applemarketingtools.com/api/v2/jp/music/most-played/#{num}/songs.json"
   #url = './songs.json'
   content = URI.open(url).read
