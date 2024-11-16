@@ -30,13 +30,23 @@ def md_table(*arr)
   "| #{arr.join(' | ')} |\n"
 end
 
+def md_link(name, link)
+  "[#{name}](#{link})"
+end
+
 if __FILE__ == $PROGRAM_NAME
 
-  header = %w[Rank Songs Image]
+  header = %w[Rank ArtWork Songs]
   content = md_table(header)
   content << md_table(Array.new(header.length, '---'))
-  itunes_ranking(7).each.with_index do |track, index|
-    content << md_table([index+1, track.info, "![#{track.name}](#{track.artworkUrl100})"])
+  itunes_ranking(7).each.with_index(1) do |track, index|
+    content << md_table(
+      [
+        index,
+        "![#{track.name}](#{track.artworkUrl100})",
+        md_link(track.info,track.url)
+      ]
+    )
   end
 
   content << "\nReference: [RSS Feed Generator](https://rss.applemarketingtools.com/)"
