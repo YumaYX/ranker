@@ -8,22 +8,13 @@ require_relative 'dclass'
 def itunes_most_played(num = 100)
   url = "https://rss.applemarketingtools.com/api/v2/jp/music/most-played/#{num}/songs.json"
   # url = './songs.json'
+
   content = URI.open(url).read
   JSON.parse(content)['feed']['results']
 end
 
 def itunes_ranking(num = 30)
-  tracks = []
-
-  itunes_most_played(num).each do |ele|
-    myclass = create_dclass(ele)
-    track = myclass.new
-
-    next if tracks.any? { |i| i.info.eql?(track.info) }
-
-    tracks << track
-  end
-  tracks
+  itunes_most_played(num).map { |ele| create_dclass(ele).new }
 end
 
 def md_table(*arr)
