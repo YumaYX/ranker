@@ -33,7 +33,7 @@ def generate_markdown_content
   content = markdown_table_row(header)
   content << markdown_table_row(Array.new(header.length, '---'))
 
-  fetch_itunes_ranking(7).each.with_index(1) do |track, index|
+  fetch_itunes_ranking(30).each.with_index(1) do |track, index|
     content << markdown_table_row(
       index,
       "!" + markdown_link(track.name, track.artworkUrl100),
