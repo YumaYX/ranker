@@ -1,5 +1,5 @@
 [package]
-name = "rjson"
+name = "ranker"
 version = "0.1.0"
 edition = "2021"
 
@@ -8,3 +8,4 @@ reqwest = { version = "0.11.4", features = ["json"] }
 tokio = { version = "1.11.0", features = ["full"] }
 serde = { version = "^1.0.130", features = ["derive"] }
 serde_json = "^1.0.67"
+chrono = "0.4.39"
