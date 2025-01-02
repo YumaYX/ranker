@@ -16,7 +16,7 @@ pub async fn generate_markdown_content() -> Result<String> {
     let mut content: String = markdown_table_row(&header);
     content += &markdown_table_row(&["---", "---", "---"]);
 
-    let tracks = fetch_itunes_most_played(30).await?;
+    let tracks = fetch_itunes_most_played(100).await?;
     for (index, track) in tracks.iter().enumerate() {
         let index_str = (index + 1).to_string();
         let artwork = String::from("!") + &markdown_link(&track.name, &track.artwork_url100);
